@@ -14,12 +14,20 @@ export default {
 <template>
     <div class="ms_card">
         <img :src="image" alt="">
-        <h2>{{ cardObj.name }}</h2>
-        <h3>{{ cardObj.status }}</h3>
-        <h3>{{ cardObj.species }}</h3>
+        <h2 class="text-center mt-3">{{ cardObj.name }}</h2>
+        <h3 class="fs-1 fw-lighter text-center mt-5">{{ cardObj.status }}</h3>
+        <h3 class="fs-1 fw-lighter text-center">{{ cardObj.species }}</h3>
     </div>
 
 </template>
 
 <style scoped lang="scss">
+@use "../style/partials/variables" as *;
+.ms_card {
+    margin-top: 80px;
+    color: $main-text-color;
+    img {
+        border-radius: 50%;    
+    }
+}
 </style>
