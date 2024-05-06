@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import AppHeader from "./components/AppHeader.vue";
+import AppMain from "./components/AppMain.vue";
 export default {
     data() {
         return {
@@ -8,18 +9,19 @@ export default {
         };
     },
     created() {
-        axios.get("https://rickandmortyapi.com/api/character")
+        axios
+            .get("https://rickandmortyapi.com/api/character")
             .then((resp) => {
-            this.cardsArray = resp.data.data;
-            // console.log(resp);
-        });
+                this.cardsArray = resp.data.results;
+            });
     },
-    components: { AppHeader }
+    components: { AppHeader, AppMain }
 };
 </script>
 
 <template>
-  <AppHeader />
+    <AppHeader />
+    <AppMain :cardsArray="cardsArray" />
 </template>
 
 <style lang="scss">
@@ -28,5 +30,4 @@ export default {
 template {
     background-color: $background-color;
 }
-
 </style>
