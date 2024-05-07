@@ -4,27 +4,24 @@ import axios from "axios";
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
 import AppSearch from "./components/AppSearch.vue";
+import AppLoader from "./components/AppLoader.vue"
 export default {
     components: { 
-        AppHeader, AppMain, AppSearch 
+        AppHeader, AppMain, AppSearch, AppLoader 
     },
 
     data() {
         return {
-            cardsArray: [],
             store,
+            isLoading: false,
         };
     },
     created() {
         this.getStatus();
-        // axios
-        //     .get("https://rickandmortyapi.com/api/character")
-        //     .then((resp) => {
-        //         this.cardsArray = resp.data.results;
-        //     });
     }, 
     methods: {
         getStatus() {
+            this.isLoading = true;
             const paramObj = {
                 status: "",
             }
@@ -38,7 +35,8 @@ export default {
                 params: paramObj,
             })
             .then((resp) => {
-                this.cardsArray = resp.data.results;
+                this.store.cardList = resp.data.results;
+                this.isLoading = false;
             })
         }
     }  
@@ -48,7 +46,8 @@ export default {
 <template>
     <AppHeader />
     <AppSearch @filter="getStatus" />
-    <AppMain :cardsArray="cardsArray" />
+    <AppLoader v-if="isLoading"/>
+    <AppMain v-else /> 
 </template>
 
 <style lang="scss">
