@@ -2,7 +2,12 @@
 import axios from "axios";
 import AppHeader from "./components/AppHeader.vue";
 import AppMain from "./components/AppMain.vue";
+import AppSearch from "./components/AppSearch.vue";
 export default {
+    components: { 
+        AppHeader, AppMain, AppSearch 
+    },
+
     data() {
         return {
             cardsArray: [],
@@ -14,13 +19,13 @@ export default {
             .then((resp) => {
                 this.cardsArray = resp.data.results;
             });
-    },
-    components: { AppHeader, AppMain }
+    },   
 };
 </script>
 
 <template>
     <AppHeader />
+    <AppSearch />
     <AppMain :cardsArray="cardsArray" />
 </template>
 
