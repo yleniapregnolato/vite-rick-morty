@@ -16,11 +16,12 @@ export default {
         };
     },
     created() {
-        axios
-            .get("https://rickandmortyapi.com/api/character")
-            .then((resp) => {
-                this.cardsArray = resp.data.results;
-            });
+        this.getStatus();
+        // axios
+        //     .get("https://rickandmortyapi.com/api/character")
+        //     .then((resp) => {
+        //         this.cardsArray = resp.data.results;
+        //     });
     }, 
     methods: {
         getStatus() {
@@ -32,6 +33,13 @@ export default {
             }
 
             console.log("get status", this.store.selectedStatus);
+            axios
+            .get("https://rickandmortyapi.com/api/character", {
+                params: paramObj,
+            })
+            .then((resp) => {
+                this.cardsArray = resp.data.results;
+            })
         }
     }  
 };

@@ -14,7 +14,7 @@ export default {
 <template>
     <div class="container">
         <select @change="$emit('filter')" v-model="store.selectedStatus">
-            <option value="status" v-for="condition in status">{{ condition }}</option>
+            <option :value="condition" v-for="condition in status">{{ condition }}</option>
         </select>
     </div>
 </template>
